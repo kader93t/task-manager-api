@@ -74,23 +74,22 @@ router.get('/users/profile', auth, async (req, res) => {
   res.send(req.user);
 });
 
-router.get('/users/:id', auth, async (req, res) => {
-  const id = req.params.id;
-  // let id = '';
-  // try {
-  //   id = ObjectID()
-  // } catch (err) {
-  //   return res.status(404).send(err);
-  // }
-  try {
-    const user = await User_model.findById(id);
-    if (!user) {
-      res.status(404).send();
-    } else res.send(user);
-  } catch (err) {
-    res.status(404).send();
-  }
-});
+// router.get('/users/:id', auth, async (req, res) => {
+//   let id = '';
+//   try {
+//     id = ObjectID(req.params.id);
+//   } catch (err) {
+//     return res.status(404).send(err);
+//   }
+//   try {
+//     const user = await User_model.findById(id);
+//     if (!user) {
+//       res.status(404).send();
+//     } else res.send(user);
+//   } catch (err) {
+//     res.status(404).send();
+//   }
+// });
 
 router.patch('/users/me', auth, async (req, res) => {
   const updates = Object.keys(req.body);
@@ -145,7 +144,13 @@ router.delete('/users/me/pic', auth, async (req, res) => {
 });
 
 router.get('/users/:id/pic', async (req, res) => {
-  const user = await User_model.findById(req.params.id);
+  let id = '';
+  try {
+    id = ObjectID(req.params.id);
+  } catch (err) {
+    return res.status(404).send(err);
+  }
+  const user = await User_model.findById(id);
   if (!user || !user.pic) {
     return res.status(404).send();
   }
