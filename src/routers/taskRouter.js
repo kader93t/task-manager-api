@@ -99,7 +99,6 @@ router.delete('/tasks/:id', auth, async (req, res) => {
       _id: req.params.id,
       owner: req.user._id,
     });
-
     if (task) {
       task.remove();
       res.send(task);

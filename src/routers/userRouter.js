@@ -28,7 +28,6 @@ router.post('/users/login', async (req, res) => {
       res.status(404).send({ error: 'Unable to login' });
     }
   } catch (err) {
-    console.log(err);
     res.status(500).send();
   }
 });
@@ -63,7 +62,7 @@ router.post('/users', async (req, res) => {
     await user.save();
     const token = await user.generateToken();
     sendWelcom(user.email, user.name);
-    res.send({ user, token });
+    res.status(201).send({ user, token });
   } catch (err) {
     console.log(err);
     res.status(400).send();
@@ -129,7 +128,7 @@ router.post(
   auth,
   upload.single('pic'),
   async (req, res) => {
-    req.user.pic = sharp(req.file.buffer).png().toBuffer();
+    req.user.pic = await sharp(req.file.buffer).png().toBuffer();
     await req.user.save();
     res.send();
   },

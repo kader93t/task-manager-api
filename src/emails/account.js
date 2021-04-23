@@ -11,14 +11,7 @@ const sendWelcom = (email, name) => {
     html: '<strong>Task manager</strong>',
   };
 
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('email sent');
-    })
-    .catch((err) => {
-      console.log('error: ', err.response.body.errors);
-    });
+  sgMail.send(msg);
 };
 
 const sendCnacelation = (email, name) => {
@@ -30,14 +23,7 @@ const sendCnacelation = (email, name) => {
     html: '<strong>Task manager</strong>',
   };
 
-  sgMail
-    .send(msg)
-    .then(() => {
-      console.log('email sent');
-    })
-    .catch((err) => {
-      console.log('error: ', err.response.body.errors);
-    });
+  sgMail.send(msg);
 };
 
 module.exports = {

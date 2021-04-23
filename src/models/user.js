@@ -84,6 +84,7 @@ user_schema.statics.findByCredential = async (email, pass) => {
       else return false;
     } else return false;
   } catch (err) {
+    console.log('hakahakha');
     throw err;
   }
 };
